@@ -16,13 +16,27 @@ public class DataHubExercise
 
     private static int findUnsortedSubArrayEnd(int[] array, int start)
     {
-        for (int i = start + 1; i < array.length - 1; i++)
-        {
-            if (array[i] > array[i - 1] && array[i] < array[i + 1])
-                return i;
-        }
+        int endOfSubArray = array.length - 1;
+        int maxValueInSubArray = array[start];
 
-        return array.length - 1;
+        for (int i = array.length - 1; i > start - 1; i--)
+            if (array[i] < array[i - 1])
+            {
+                endOfSubArray = i;
+                break;
+            }
+
+        for (int i = start; i <= endOfSubArray; i++)
+            if (array[i] > maxValueInSubArray)
+                maxValueInSubArray = array[i];
+
+        for (int i = array.length - 1; i > endOfSubArray; i--)
+            if (array[i] < maxValueInSubArray)
+            {
+                endOfSubArray = i;
+                break;
+            }
+        return endOfSubArray;
     }
 
     private static void printSubArray(int[] array)
