@@ -22,3 +22,4 @@ public class IteratorTest
         list2.stream();
     }
 }
+
